@@ -16,7 +16,7 @@ int main()
     struct sockaddr_in serverAddress; // client will connect on this
 
     // int n, n1, n2, choice, ans, i = 0, j = 0;
-    int n1, n2 , ans;
+    int n1, n2, ans;
     char op;
     char msg1[MAXSZ];
     char msg2[MAXSZ];
@@ -45,11 +45,11 @@ int main()
         n1 = msg1[0] - '0';
         n2 = msg1[2] - '0';
         op = msg1[1];
-        //printf("%d\t%c\t%d\n", n1, op, n2);
+        // printf("%d\t%c\t%d\n", n1, op, n2);
         write(sockfd, &op, 10);
         write(sockfd, &n1, sizeof(n1));
         write(sockfd, &n2, sizeof(n2));
-        
+
         read(sockfd, &ans, sizeof(ans));
         printf("Received message from  server::%d\n", ans);
     }

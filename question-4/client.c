@@ -1,10 +1,10 @@
-#include<stdio.h>
-#include<string.h>
-#include<arpa/inet.h>
-#include<sys/types.h>
-#include<sys/socket.h>
-#include<netinet/in.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <arpa/inet.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <stdlib.h>
 #include <time.h>
 
 #define port 8080
@@ -15,31 +15,30 @@ int main()
 {
     char msg[max];
     time_t t;
-    int day,month,year;
+    int day, month, year;
     struct sockaddr_in serveraddr;
     struct sockaddr_in clientaddr;
-    int sockfd = socket(AF_INET,SOCK_STREAM,0);
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    memset(&serveraddr,0,sizeof(serveraddr));
+    memset(&serveraddr, 0, sizeof(serveraddr));
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_addr.s_addr = inet_addr(server_addr);
     serveraddr.sin_port = htons(port);
 
-    connect(sockfd,(struct sockaddr *)&serveraddr,sizeof(serveraddr));
+    connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
 
-    while(1)
+    while (1)
     {
-        //read ans from server
+        // read ans from server
         gets(msg);
 
-        write(sockfd,&msg,sizeof(msg));
+        write(sockfd, &msg, sizeof(msg));
 
-        read(sockfd,&day,sizeof(day));
-        read(sockfd,&month,sizeof(month));
-        read(sockfd,&year,sizeof(year));
-        printf("\nServer computed : %d//%d//%d",day,month,year);
+        read(sockfd, &day, sizeof(day));
+        read(sockfd, &month, sizeof(month));
+        read(sockfd, &year, sizeof(year));
+        printf("\nServer computed : %d//%d//%d", day, month, year);
         // printf("\nServer computed : %d",day);
-
     }
 
     return 0;
