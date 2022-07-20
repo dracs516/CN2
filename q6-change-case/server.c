@@ -51,7 +51,7 @@ int main()
                     }
                     c++;
                 }
-                write(newsockfd, &string, sizeof(newString));
+                write(newsockfd, &string, sizeof(string));
                 printf("\nServer computed result\n");
             }
             exit(0);
