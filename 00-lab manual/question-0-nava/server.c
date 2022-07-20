@@ -47,7 +47,7 @@ int main()
         clientAddressLength = sizeof(clientAddress); // initialize the client address length
         newsockfd = accept(sockfd, (struct sockaddr *)&clientAddress, &clientAddressLength);
         printf("connected to client: %s\n", inet_ntoa(clientAddress.sin_addr)); // inet_ntoa converts the IP address to a string
-
+        printf("connected to client port: %d\n", (int)ntohs(clientAddress.sin_port));
         // child process is created for serving each new clients
         pid = fork();
         if (pid == 0) // child process rec and send

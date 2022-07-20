@@ -13,3 +13,6 @@ sudo ./raw
 for icmp flooding ddos attack
 gcc icmp.c -o icmp
 sudo ./icmp 127.0.0.1 127.0.0.1
+
+printf("local address: %s\n", inet_ntoa( localAddress.sin_addr));
+printf("local port: %d\n", (int) ntohs(localAddress.sin_port));
