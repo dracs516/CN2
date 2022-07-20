@@ -58,7 +58,7 @@ int main()
                         // Checking if character is not EOF.
                         // If it is EOF stop eading.
                     } while (ch != EOF);
-                    // ans[k] = '\0';
+                    ans[k] = '\0';
                 
                     // Closing the file
                     fclose(ptr);
