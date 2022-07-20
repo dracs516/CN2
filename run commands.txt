@@ -1,0 +1,7 @@
+gcc server.c -o server
+gcc client.c -o client
+./server
+./client
+
+printf("Client up and running: \n");
+printf("Server up and running: \n");

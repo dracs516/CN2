@@ -14,28 +14,27 @@ int main()
 {
 
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    int n1, n2, ans;
-    char msg[max];
+    char msg[max], ans[max];
 
     struct sockaddr_in serveraddr;
-    struct sockaddr_in clientaddr;
+    // struct sockaddr_in clientaddr; // not needed
 
     memset(&serveraddr, 0, sizeof(serveraddr));
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_addr.s_addr = inet_addr(server_addr);
     serveraddr.sin_port = htons(port);
 
+    printf("Client up and running: \n");
     connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
     while (1)
     {
-        printf("\nEnter expression to be executed : ");
+        printf("\nEnter string to reverse: ");
         gets(msg);
-        n1 = msg[0] - '0';
-
-        write(sockfd, &n1, sizeof(n1));
-
+        // write msg to server
+        write(sockfd, &msg, sizeof(msg));
+        // read ans from server
         read(sockfd, &ans, sizeof(ans));
-        printf("\nServer computed : %d", ans);
+        printf("\nServer computed : %s", ans);
     }
 
     return 0;

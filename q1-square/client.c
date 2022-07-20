@@ -14,7 +14,7 @@ int main()
 {
 
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    char msg[max], ans[max];
+    int n1, ans;
 
     struct sockaddr_in serveraddr;
     struct sockaddr_in clientaddr;
@@ -27,13 +27,13 @@ int main()
     connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
     while (1)
     {
-        printf("\nEnter expression to be executed : ");
-        gets(msg);
-        // write msg to server
-        write(sockfd, &msg, sizeof(msg));
-        // read ans from server
+        printf("\nEnter the number to be squared : ");
+        scanf("%d", &n1);
+
+        write(sockfd, &n1, sizeof(n1));
+
         read(sockfd, &ans, sizeof(ans));
-        printf("\nServer computed : %s", ans);
+        printf("\nServer computed : %d", ans);
     }
 
     return 0;

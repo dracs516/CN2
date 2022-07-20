@@ -17,7 +17,10 @@ a connection oriented approach.
 
 int main()
 {
-    int n1, n2, ans;
+    // read variable size string using char
+    char msg[max];
+    // read variable size string using char
+    char ans[max]; // not needed
 
     struct sockaddr_in serveraddress;
     struct sockaddr_in clientaddress;
@@ -32,6 +35,8 @@ int main()
     bind(sockfd, (struct sockaddr *)&serveraddress, sizeof(serveraddress));
 
     listen(sockfd, 5);
+
+    printf("Server up and running: \n");
     while (1)
     {
 
@@ -43,9 +48,20 @@ int main()
         {
             while (1)
             {
-                read(newsockfd, &n1, sizeof(n1));
-                ans = n1 * n1;
-                write(newsockfd, &ans, sizeof(ans));
+                read(newsockfd, &msg, sizeof(msg));
+                // reverse msg
+                int i = 0;
+                int j = strlen(msg) - 1;
+                while (i < j)
+                {
+                    char temp = msg[i];
+                    msg[i] = msg[j];
+                    msg[j] = temp;
+                    i++;
+                    j--;
+                }
+                // write msg to client
+                write(newsockfd, &msg, sizeof(msg));
                 printf("\nServer computed the result\n");
             }
             exit(0);
