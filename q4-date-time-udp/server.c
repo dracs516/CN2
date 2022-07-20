@@ -34,7 +34,7 @@ int main(int argc, char **argv)
        time_t now = time(NULL);
        struct tm *t = localtime(&now);
 
-       strftime(text, sizeof(text)-1, "%d/%m/%Y %H:%M:%S", t);
+       strftime(text, sizeof(text) - 1, "%d/%m/%Y %H:%M:%S", t);
        sendto(sockfd, text, n, 0, (struct sockaddr *)&cliaddr, len);
 
        printf(" Sent date : %s\n\n", text);

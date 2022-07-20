@@ -68,14 +68,16 @@ int main()
 
 	n = recvfrom(sockfd, &n, sizeof(n), MSG_WAITALL, (struct sockaddr *)&cliaddr, &len);
 	// printf("Client : %s\n", buffer);
-	int flag = palindrome(n);
-	printf("%d", flag);
-	if (flag)
-	{
-		buffer = "palindrome";
-	}
-	else
-		buffer = "not palindrome";
+
+	// int flag = palindrome(n);
+	// printf("%d", flag);
+	// if (flag)
+	// {
+	// 	buffer = "palindrome";
+	// }
+	// else
+	// 	buffer = "not palindrome";
+	buffer = "heyyo";
 	sendto(sockfd, (char *)buffer, sizeof(buffer), MSG_CONFIRM, (const struct sockaddr *)&cliaddr, len);
 	printf("Hello message sent.\n");
 

@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
        len = sizeof(servaddr);
        sendto(sockfd, sendline, MAXLINE, 0, (struct sockaddr *)&servaddr, len);
-       
+
        n = recvfrom(sockfd, recvline, MAXLINE, 0, NULL, NULL);
        printf("\nTime from server = %s\n\n", recvline);
 
