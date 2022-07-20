@@ -24,18 +24,11 @@ int main()
     listen(sockfd, 4);
 
     printf("Server up and running: \n");
-    while (1)
-    {
         int clientLen = sizeof(clientaddr);
         int newsockfd = accept(sockfd, (struct sockaddr *)&clientaddr, &clientLen);
         printf("\nconnected to ip adddress: %s", inet_ntoa(clientaddr.sin_addr));
-        int pid = fork();
-        if (pid == 0)
-        {
-            while (1)
-            {
-                read(sockfd, &n, sizeof(n));
-                read(sockfd, &arr, 10 * sizeof(int));
+
+                read(newsockfd, &arr, 10 * sizeof(int));
                 for (int i = 0; i < 10; i++)
                 {
                     for (int j = i + 1; j < 10; j++)
@@ -56,13 +49,7 @@ int main()
                     printf("%d ", arr[i]);
                 }
 
-                write(sockfd, &arr, 10 * sizeof(int));
-            }
-            exit(0);
-        }
-        else
-            close(newsockfd);
-    }
-
+                write(newsockfd, &arr, 10 * sizeof(int));
+            close(sockfd);
     return 0;
 }
