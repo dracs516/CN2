@@ -10,29 +10,38 @@
 
 int security_key(int n)
 {
-    int arr[10] = {-1,0,0,0,0,0,0,0,0,0};
-    int key=0;
-    while(n) {
+    int arr[10] = {-1, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int key = 0;
+    while (n)
+    {
 
-        int rem = n%10; 
-        switch(rem)
-        {
-            case 1:arr[1]++;break;
-            case 2:arr[2]++;break;
-            case 3:arr[3]++;break;
-            case 4:arr[4]++;break;
-            case 5:arr[5]++;break;
-            case 6:arr[6]++;break;
-            case 7:arr[7]++;break;
-            case 8:arr[8]++;break;
-            case 9:arr[9]++;break;
-        }
-        n=n/10; 
+        int rem = n % 10;
+        // switch(rem)
+        // {
+        //     case 1:arr[1]++;break;
+        //     case 2:arr[2]++;break;
+        //     case 3:arr[3]++;break;
+        //     case 4:arr[4]++;break;
+        //     case 5:arr[5]++;break;
+        //     case 6:arr[6]++;break;
+        //     case 7:arr[7]++;break;
+        //     case 8:arr[8]++;break;
+        //     case 9:arr[9]++;break;
+        // }
+
+        arr[rem]++;
+
+        n = n / 10;
     }
-    for (int i = 1; i < 10; ++i) {
-        if (arr[0] < arr[i]) {
-            arr[0] = arr[i];
-            key = i;
+    for (int i = 1; i < 10; ++i)
+    {
+        // if (arr[0] < arr[i]) {
+        //     arr[0] = arr[i];
+        //     key = i;
+        // }
+        if (arr[i] > 1)
+        {
+            key++;
         }
     }
     return key;
@@ -40,7 +49,7 @@ int security_key(int n)
 
 int main()
 {
-    int data,key;
+    int data, key;
 
     struct sockaddr_in serveraddr;
     struct sockaddr_in clientaddr;

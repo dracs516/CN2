@@ -13,26 +13,26 @@ int main()
 {
     struct sockaddr_in serveraddr;
     struct sockaddr_in clientaddr;
-    char ans[max],filename[max];
-    int pid,sockfd,newsockfd;
+    char ans[max], filename[max];
+    int pid, sockfd, newsockfd;
 
-    sockfd = socket(AF_INET,SOCK_STREAM,0);
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    memset(&serveraddr,0,sizeof(serveraddr));
+    memset(&serveraddr, 0, sizeof(serveraddr));
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_addr.s_addr = inet_addr(server_ip);
     serveraddr.sin_port = htons(port);
 
-    connect(sockfd,(struct sockaddr *)&serveraddr,sizeof(serveraddr));
+    connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
 
-    while(1)
+    while (1)
     {
         printf("\nEnter file name :");
         gets(filename);
 
-        write(sockfd,&filename,sizeof(filename));
-        read(sockfd,&ans,sizeof(ans));
-        printf("%s",ans);
+        write(sockfd, &filename, sizeof(filename));
+        read(sockfd, &ans, sizeof(ans));
+        printf("%s", ans);
     }
 
     return 0;
