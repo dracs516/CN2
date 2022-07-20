@@ -22,6 +22,8 @@ int main()
 
     bind(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
     listen(sockfd, 4);
+
+    printf("Server up and running: \n");
     while (1)
     {
         int clientLen = sizeof(clientaddr);
@@ -46,6 +48,14 @@ int main()
                         }
                     }
                 }
+
+                printf("\nSorted Array in server:");
+
+                for (int i = 0; i < 10; i++)
+                {
+                    printf("%d ", arr[i]);
+                }
+
                 write(sockfd, &arr, 10 * sizeof(int));
             }
             exit(0);

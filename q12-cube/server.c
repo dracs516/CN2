@@ -50,8 +50,11 @@ int main()
             }
             exit(0);
         }
+
         else
+        {
             close(newsockfd);
+        }
     }
     return 0;
 }

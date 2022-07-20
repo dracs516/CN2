@@ -1,9 +1,10 @@
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <netinet/in.h>
-#include <stdio.h>
 
 #define max 100
 #define port 8080
@@ -11,10 +12,11 @@
 
 int main()
 {
+    char msg[max];
     struct sockaddr_in serveraddr;
     struct sockaddr_in clientaddr;
-
-    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    int sockfd, newsockfd, pid;
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
     memset(&serveraddr, 0, sizeof(serveraddr));
     serveraddr.sin_family = AF_INET;
@@ -22,22 +24,14 @@ int main()
     serveraddr.sin_port = htons(port);
 
     connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
-    int arr[10] = {5, 4, 3, 8, 9, 1, 2, 0, 6};
-    inr arr1[10];
+
     while (1)
     {
-        int n = 10;
-        printf("\nArray elements sent to server\n");
-        write(sockfd, &n, sizeof(n));
-        write(sockfd, &arr, 10 * sizeof(int));
-        read(sockfd, &arr1, 10 * sizeof(int));
-
-        printf("\nSorted Array  :");
-
-        for (int i = 0; i < n; i++)
-        {
-            printf("%d ", arr1[i]);
-        }
+        printf("Enter message: \n");
+        gets(msg);
+        read(sockfd, &msg, sizeof(msg));
+        printf("\nServer said : %s", msg);
+        exit(0);
     }
     return 0;
 }

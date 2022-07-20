@@ -27,11 +27,11 @@ int main()
 
     while (1)
     {
-        printf("\nEnter string to change case ");
+        printf("\nEnter string to change case: \n");
         gets(string);
         write(sockfd, &string, sizeof(string));
-        read(sockfd, &string, sizeof(string));
-        printf("\nServer computed : %s", string);
+        read(sockfd, &newString, sizeof(newString));
+        printf("\nServer computed : %s", newString);
     }
     return 0;
 }
