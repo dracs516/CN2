@@ -13,56 +13,64 @@ int main()
 {
     struct sockaddr_in serveraddr;
     struct sockaddr_in clientaddr;
-    char ans[max],filename[max];
-    int pid,sockfd,newsockfd;
+    char ans[max], filename[max];
+    int pid, sockfd, newsockfd;
 
-    sockfd = socket(AF_INET,SOCK_STREAM,0);
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    memset(&serveraddr,0,sizeof(serveraddr));
+    memset(&serveraddr, 0, sizeof(serveraddr));
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_addr.s_addr = htonl(INADDR_ANY); // This is an IP address that is used when we don't want to bind a socket to any specific IP
     serveraddr.sin_port = htons(port);
 
-    bind(sockfd,(struct sockaddr *)&serveraddr,sizeof(serveraddr));
+    bind(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
 
-    listen(sockfd,5);
+    listen(sockfd, 5);
 
-    while(1)
+    while (1)
     {
         int clientLen = sizeof(clientaddr);
-        newsockfd = accept(sockfd,(struct sockaddr *)&clientaddr,&clientLen);
-        printf("\nConnected to client ip : %s",inet_ntoa(clientaddr.sin_addr));
+        newsockfd = accept(sockfd, (struct sockaddr *)&clientaddr, &clientLen);
+        printf("\nConnected to client ip : %s", inet_ntoa(clientaddr.sin_addr));
         pid = fork();
-        if(pid == 0)
+        if (pid == 0)
         {
-            while(1)
+            while (1)
             {
-                read(newsockfd,&filename,sizeof(filename));
-                FILE* ptr;
+                read(newsockfd, &filename, sizeof(filename));
+                FILE *ptr;
                 char ch;
 
                 // Opening file in reading mode
                 ptr = fopen(filename, "r");
-            
-                if (NULL == ptr) {
+
+                if (NULL == ptr)
+                {
                     printf("file can't be opened \n");
                 }
-                else{
+                else
+                {
                     printf("content of this file are \n");
-                    int k=0;
-                    do {
+                    int k = 0;
+                    do
+                    {
                         ch = fgetc(ptr);
                         printf("%c", ch);
                         ans[k++] = ch;
-                
+
                         // Checking if character is not EOF.
                         // If it is EOF stop eading.
                     } while (ch != EOF);
+<<<<<<< HEAD:file-content-read/server.c
                     ans[k] = '\0';
                 
+=======
+                    // ans[k] = '\0';
+
+>>>>>>> 90a8e393ed0c57e56e1816f2e9b79406a86c3712:q14-file-content-read/server.c
                     // Closing the file
                     fclose(ptr);
-                    write(newsockfd,&ans,sizeof(ans));
+                    write(newsockfd, &ans, sizeof(ans));
                     printf("\nServer has read file content\n");
                 }
             }
@@ -73,4 +81,3 @@ int main()
     }
     return 0;
 }
-
