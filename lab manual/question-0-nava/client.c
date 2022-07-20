@@ -4,8 +4,7 @@
 #include <sys/socket.h> //socket
 #include <string.h>     //memset
 #include <stdlib.h>     //sizeof
-#include <netinet/in.h> //INADDR_ANY INADDR_ANY is the IP address of the host machine.
-
+#include <netinet/in.h> //INADDR_ANY // INADDR_ANY is the IP address of the host machine.
 #define PORT 8080
 #define SERVER_IP "127.0.0.1"
 #define MAXSZ 100 // max size of message
@@ -16,7 +15,7 @@ int main()
     struct sockaddr_in serverAddress; // client will connect on this
 
     // int n, n1, n2, choice, ans, i = 0, j = 0;
-    int n1, n2 , ans;
+    int n1, n2, ans;
     char op;
     char msg1[MAXSZ];
     char msg2[MAXSZ];
@@ -28,8 +27,8 @@ int main()
     // memset is used to set the memory area pointed to by ptr to the value of val.
     memset(&serverAddress, 0, sizeof(serverAddress));
     serverAddress.sin_family = AF_INET;
-    serverAddress.sin_addr.s_addr = inet_addr(SERVER_IP);
-    serverAddress.sin_port = htons(PORT); // htons makes sure its in big endian
+    serverAddress.sin_addr.s_addr = inet_addr(SERVER_IP); // inet_addr converts the IP address to a 32-bit number.
+    serverAddress.sin_port = htons(PORT);                 // htons makes sure its in big endian
 
     // client  connect to server on port
     connect(sockfd, (struct sockaddr *)&serverAddress, sizeof(serverAddress));
@@ -45,11 +44,11 @@ int main()
         n1 = msg1[0] - '0';
         n2 = msg1[2] - '0';
         op = msg1[1];
-        //printf("%d\t%c\t%d\n", n1, op, n2);
+        printf("%d\t%c\t%d\n", n1, op, n2);
         write(sockfd, &op, 10);
         write(sockfd, &n1, sizeof(n1));
         write(sockfd, &n2, sizeof(n2));
-        
+
         read(sockfd, &ans, sizeof(ans));
         printf("Received message from  server::%d\n", ans);
     }
