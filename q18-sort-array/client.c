@@ -4,6 +4,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <stdio.h>
+#include <string.h>
 
 #define max 100
 #define port 8080
@@ -21,7 +22,6 @@ int main()
     serveraddr.sin_addr.s_addr = inet_addr(server_ip);
     serveraddr.sin_port = htons(port);
 
-    connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
     int arr[10] = {5, 4, 3, 8, 9, 1, 2, 0, 6, 7};
     int arr1[10];
 
@@ -32,18 +32,15 @@ int main()
     {
         printf("%d ", arr[i]);
     }
-    while (1)
-    {
+    connect(sockfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
         printf("\nArray elements sent to server\n");
-        write(sockfd, &n, sizeof(n));
         write(sockfd, &arr, 10 * sizeof(int));
-        read(sockfd, &arr1, 10 * sizeof(int));
+        read(sockfd, &arr, 10 * sizeof(int));
 
         printf("\nArray after sorting in client: ");
         for (int i = 0; i < n; i++)
         {
-            printf("%d ", arr1[i]);
+            printf("%d ", arr[i]);
         }
-    }
     return 0;
 }
