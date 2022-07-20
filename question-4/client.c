@@ -29,7 +29,7 @@ int main()
 
     while (1)
     {
-        // read ans from server
+        // get some random message/request from user
         gets(msg);
 
         write(sockfd, &msg, sizeof(msg));
